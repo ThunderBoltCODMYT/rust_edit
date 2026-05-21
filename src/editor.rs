@@ -25,7 +25,7 @@ SOFTWARE.
 use crate::events::EditorEvent;
 use crate::utils::default_filename;
 use crossterm::terminal::size;
-use std::io::stdout;
+use std::io::{Write, stdout};
 use std::vec;
 
 const LINE_NUMBER_WIDTH: usize = 4;
