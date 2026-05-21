@@ -25,7 +25,7 @@ SOFTWARE.
 use crate::events::EditorEvent;
 use crate::utils::default_filename;
 use crossterm::terminal::size;
-use std::io::{Write, stdout};
+use std::io::stdout;
 use std::vec;
 
 const LINE_NUMBER_WIDTH: usize = 4;
@@ -134,11 +134,8 @@ impl Editor {
         let mut out = stdout();
         print!("\x1b[2J\x1b[H");
         let (_, term_height) = size().unwrap();
-
         let screen_height = (term_height as usize).saturating_sub(2);
-
         let start = self.viewport_y;
-
         let end = (start + screen_height).min(self.buffer.len());
 
         for (i, line) in self.buffer[start..end].iter().enumerate() {
@@ -151,29 +148,22 @@ impl Editor {
 
         let status_y = screen_height + 1;
 
-        
         print!(
             "\x1b[{};1H\x1b[7m Ln {} Col {} | Lines {} \x1b[0m",
             status_y,
-            self.cursor_y + 1, // current cursor line
-            self.cursor_x + 1, // current cursor column
-            self.buffer.len()  // total number of lines in the buffer
+            self.cursor_y + 1,
+            self.cursor_x + 1,
+            self.buffer.len()
         );
 
         let screen_y = (self.cursor_y - self.viewport_y) + 1;
-
-              ^
-        
         let screen_x = self.cursor_x + LINE_NUMBER_WIDTH + 2;
 
-        
         print!("\x1b[{};{}H", screen_y, screen_x);
-
-        
         out.flush().unwrap();
     }
 
-    pub fn handle_event(&mut self, event: EditorEvent) -> bool { 
+    pub fn handle_event(&mut self, event: EditorEvent) -> bool {
         match event {
             EditorEvent::Insert(c) => self.insert_char(c),
             EditorEvent::Backspace => self.backspace(),
@@ -188,3 +178,4 @@ impl Editor {
         return true;
     }
 }
+
