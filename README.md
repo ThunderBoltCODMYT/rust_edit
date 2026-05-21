@@ -14,3 +14,11 @@ Just a lightweight toy terminal editor I wrote in Rust to mess around with termi
 
 ### A small tweak for performance:
 - **Dirty lines tracking:** To stop the screen from flickering, it doesn't redraw the whole screen every time you press a key. It tracks which lines actually changed and only updates those rows.
+
+# How to use it:
+You can build it from source by executing this (you need to have rust and cargo installed tho:
+```
+git clone https://github.com/thunderboltcodmyt/rust_edit
+cd rust_edit/
+cargo build
+```
