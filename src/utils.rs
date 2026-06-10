@@ -367,3 +367,27 @@ pub fn is_valid_filename(name: &str) -> bool {
 
     true
 }
+
+// Put this at the bottom to catch everything else
+#[cfg(not(any(
+    target_os = "windows", target_os = "linux", target_os = "macos",
+    target_os = "freebsd", target_os = "openbsd", target_os = "netbsd",
+    target_os = "dragonfly", target_os = "haiku", target_os = "redox",
+    target_os = "hurd", target_os = "illumos", target_os = "solaris",
+    target_os = "aix", target_os = "espidf", target_os = "horizon",
+    target_os = "vita", target_os = "xous", target_os = "hermit",
+    target_os = "l4re", target_os = "nto", target_os = "teeos"
+)))]
+pub fn is_valid_filename(name: &str) -> bool {
+    let invalid = ['/', '\0'];
+
+    if name.is_empty() || name.chars().any(|c| invalid.contains(&c)) {
+        return false;
+    }
+
+    if name.len() > 255 {
+        return false;
+    }
+
+    true
+}

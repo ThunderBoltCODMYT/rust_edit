@@ -46,8 +46,14 @@ fn main() -> std::io::Result<()> {
     let mut editor = Editor::new();
 
     if args.len() > 1 {
+        if args[1].trim().is_empty() {
+            eprintln!("Filename is empty!");
+            exit(1);
+        }
+
         let file = args[1].clone();
 
+        // deref coercion
         if !is_valid_filename(&file) {
             eprintln!("Invalid filename: {}", file);
             exit(1);
