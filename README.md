@@ -1,6 +1,6 @@
 # rust_edit
 
-Just a lightweight toy terminal editor I wrote in Rust to mess around with terminal logic and see if I could make one that works.
+Just a lightweight toy most bare-bones terminal editor I wrote in Rust to mess around with terminal logic and see if I could make one that works.
 
 > [!NOTE]
 > Licensed under MIT
